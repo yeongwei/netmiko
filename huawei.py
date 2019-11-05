@@ -3,17 +3,17 @@ from datetime import datetime
 import logging
 
 device = {
-    "device_type":  "cisco_ios",
-    "host":         "10.79.0.225",
-    "username":     "Malaysia",
-    "password":     "Cisco123",
-    "secret":       "Cisco123"
+    "device_type":  "huawei",
+    "host":         "XX.XX.X.XXX",
+    "username":     "XXxxxXXX",
+    "password":     "XXXXXxxx",
+    "secret":       "XXXXXxxx"
 }
 
 now = datetime.now()
 dte_string = now.strftime("%d.%m.%Y-%H.%M.%S")
 
-logging.basicConfig(filename=f"log/cisco_ios_{dte_string}.log", level=logging.DEBUG)
+logging.basicConfig(filename=f"log/huawei_{dte_string}.log", level=logging.DEBUG)
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger("netmiko")
 
