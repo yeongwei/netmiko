@@ -4,10 +4,10 @@ import logging
 
 device = {
     "device_type":  "cisco_ios",
-    "host":         "10.79.0.225",
-    "username":     "Malaysia",
-    "password":     "Cisco123",
-    "secret":       "Cisco123"
+    "host":         "",
+    "username":     "",
+    "password":     "",
+    "secret":       ""
 }
 
 now = datetime.now()
@@ -17,7 +17,7 @@ logging.basicConfig(filename=f"log/cisco_ios_{dte_string}.log", level=logging.DE
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger("netmiko")
 
-show_command = ""
+show_command = "show interfaces description"
 config_commands = []
 
 net_connect = ConnectHandler(**device)
@@ -46,3 +46,5 @@ else:
     logger.info(f"config_commands: {config_commands}")
     output = net_connect.send_config_set(config_commands)
     logger.info(f"output: {output}")
+
+net_connect.disconnect();

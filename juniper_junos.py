@@ -4,10 +4,10 @@ import logging
 
 device = {
     "device_type":  "juniper_junos",
-    "host":         "XX.XX.XX.XX",
-    "username":     "XXxxxxxXX",
-    "password":     "XXxxxxxXX",
-    "secret":       "XXxxxxxxX"
+    "host":         "",
+    "username":     "",
+    "password":     "",
+    "secret":       ""
 }
 
 now = datetime.now()
@@ -17,7 +17,7 @@ logging.basicConfig(filename=f"log/juniper_junos_{dte_string}.log", level=loggin
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger("netmiko")
 
-show_command = ""
+show_command = "show version"
 config_commands = []
 
 net_connect = ConnectHandler(**device)
@@ -28,8 +28,12 @@ logger.info(f"prompt: {prompt}")
 logger.info(f"Switch into Enable Mode")
 net_connect.enable()
 enabled = net_connect.check_enable_mode()
-
 logger.info(f"enabled: {enabled}")
+
+logger.info(f"Switch into Config Mode")
+net_connect.config_mode()
+config_mode = net_connect.check_config_mode()
+logger.info(f"config_mode: {config_mode}")
 
 logger.info(f"About to execute show_command")
 if show_command == "":
@@ -46,3 +50,5 @@ else:
     logger.info(f"config_commands: {config_commands}")
     output = net_connect.send_config_set(config_commands)
     logger.info(f"output: {output}")
+
+net_connect.disconnect();

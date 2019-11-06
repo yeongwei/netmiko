@@ -46,3 +46,5 @@ else:
     logger.info(f"config_commands: {config_commands}")
     output = net_connect.send_config_set(config_commands)
     logger.info(f"output: {output}")
+
+net_connect.disconnect();
