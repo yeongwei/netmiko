@@ -10,15 +10,15 @@ device = {
     "secret":       "XXXXXxxx"
 }
 
+show_command = ""
+config_commands = []
+
 now = datetime.now()
 dte_string = now.strftime("%d.%m.%Y-%H.%M.%S")
 
 logging.basicConfig(filename=f"log/huawei_{dte_string}.log", level=logging.DEBUG)
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger("netmiko")
-
-show_command = ""
-config_commands = []
 
 net_connect = ConnectHandler(**device)
 prompt = net_connect.find_prompt()
