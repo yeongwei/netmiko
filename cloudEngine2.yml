@@ -1,0 +1,52 @@
+---
+
+- name: CloudEngine command test
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    cli:
+      host: "XX.xx.XX.xx"
+      port: "22"
+      username: "XXxxxxXXx"
+      password: "XXxxxXXXxx"
+      transport: cli
+
+  tasks:
+  - name: Show something
+    ce_command:
+      commands:
+        - display device
+      provider: "{{ cli }}"
+      transport: cli
+    register: result
+  - name: Debug
+    debug:
+      msg: "{{ result }}"
+   
+#  - name: Set Something 2
+#    ce_interface:
+#     interface: "25GE1/1/15"
+#     desscription: "Testing"
+#     provider: "{{ cli }}"
+#     transport: cli
+
+  - name: Set 
+    ce_config:
+      lines: 
+        - 'interface 25GE1/1/15'
+        - 'description Testing by MANO'
+      match: none
+      provider: "{{ cli }}"
+      transport: cli
+    register: data
+
+  - name: Set Static Route
+    ce_config:
+      lines:
+        - 'undo ip route-static 211.24.4.0 255.255.255.252 Vbdif10318 210.19.122.189'
+      match: none
+      provider: "{{ cli }}"
+      transport: cli
+    register: data
+

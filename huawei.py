@@ -4,19 +4,20 @@ import logging
 
 device = {
     "device_type":  "huawei",
-    "host":         "XX.XX.X.XXX",
-    "username":     "XXxxxXXX",
-    "password":     "XXXXXxxx",
-    "secret":       "XXXXXxxx"
+    "host":         "XxxXXxxXxx",
+    "username":     "xxXxxXXXxx",
+    "password":     "XxxXxx",
+    "secret":       "XXxxxXXX"
 }
 
-show_command = ""
+show_command = "display device manufacture-info"
 config_commands = []
 
 now = datetime.now()
 dte_string = now.strftime("%d.%m.%Y-%H.%M.%S")
 
-logging.basicConfig(filename=f"log/huawei_{dte_string}.log", level=logging.DEBUG)
+# logging.basicConfig(filename=f"log/huawei_{dte_string}.log", level=logging.DEBUG)
+logging.basicConfig(filename=f"log/huawei_{dte_string}.log", level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler())
 logger = logging.getLogger("netmiko")
 
